@@ -16,5 +16,5 @@ ADD profile /root/.profile
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-EXPOSE 22
+EXPOSE 2222
 CMD ["/usr/sbin/sshd", "-D"]
