@@ -50,10 +50,10 @@ ln -sf /irssi_config /root/.irssi
 #   [ -f "$keyfile" ] && rm $keyfile
 # fi
 
-if [ -n "$ENABLE_MOSH" ]; then
-  echo "Enabling mosh support..."
-  apk --no-cache add mosh
-fi
+# if [ -n "$ENABLE_MOSH" ]; then
+#   echo "Enabling mosh support..."
+#   apk --no-cache add mosh
+# fi
 
 if [ -n "$ENABLE_SCRIPTS" ]; then
   echo "Enabling irssi script support..."
