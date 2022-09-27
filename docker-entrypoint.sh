@@ -10,8 +10,13 @@ safe_write() {
 if [ -n "$SSH_PASSWORD" ]; then
   echo "Setting SSH password..."
   echo "root:$SSH_PASSWORD" | chpasswd
-  sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' \
-    /etc/ssh/sshd_config
+  sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+fi
+
+
+if [ -n "$SSH_PORT" ]; then
+  echo "Setting SSH port to $SSH_PORT"
+  sed -i "s/^#*Port [0-9]\+/Port $SSH_PORT/" /etc/ssh/sshd_config
 fi
 
 if [ -n "$SSH_AUTHORIZED_KEY" ]; then
