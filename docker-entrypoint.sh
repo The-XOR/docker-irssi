@@ -22,24 +22,28 @@ if [ -n "$SSH_AUTHORIZED_KEY" ]; then
   chmod 600 /root/.ssh/authorized_keys
 fi
 
-if [ -n "$IRSSI_REPO" ]; then
-  echo "Fetching irssi configuration from git repo..."
-  keyfile=/root/repo_key
+# la configurazione viene salvata nel volume /irssi_config
+echo "Creazione link /irssi_config -> /root/.irssi"
+ln -sf /irssi_config /root/.irssi
 
-  if [ -n "$IRSSI_REPO_KEY" ]; then
-    echo "$IRSSI_REPO_KEY" > $keyfile
-    chmod 600 $keyfile
-  fi
-
-  apk --no-cache add git
-
-  GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null \
-                       -o StrictHostKeyChecking=no \
-                       -o IdentityFile=$keyfile" \
-                       git clone $IRSSI_REPO /root/.irssi
-
-  [ -f "$keyfile" ] && rm $keyfile
-fi
+# if [ -n "$IRSSI_REPO" ]; then
+#   echo "Fetching irssi configuration from git repo..."
+#   keyfile=/root/repo_key
+#
+#   if [ -n "$IRSSI_REPO_KEY" ]; then
+#     echo "$IRSSI_REPO_KEY" > $keyfile
+#     chmod 600 $keyfile
+#   fi
+#
+#   apk --no-cache add git
+#
+#   GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null \
+#                        -o StrictHostKeyChecking=no \
+#                        -o IdentityFile=$keyfile" \
+#                        git clone $IRSSI_REPO /root/.irssi
+#
+#   [ -f "$keyfile" ] && rm $keyfile
+# fi
 
 if [ -n "$ENABLE_MOSH" ]; then
   echo "Enabling mosh support..."
