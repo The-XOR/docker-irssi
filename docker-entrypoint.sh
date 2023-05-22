@@ -7,18 +7,20 @@ safe_write() {
   fi
 }
 
+echo "IRSSI image starting - 1"
 if [ -n "$SSH_PASSWORD" ]; then
   echo "Setting SSH password..."
   echo "root:$SSH_PASSWORD" | chpasswd
   sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 fi
 
-
+echo "IRSSI image starting - 2"
 if [ -n "$SSH_PORT" ]; then
   echo "Setting SSH port to $SSH_PORT"
   sed -i "s/^#*Port [0-9]\+/Port $SSH_PORT/" /etc/ssh/sshd_config
 fi
 
+echo "IRSSI image starting - 3"
 if [ -n "$SSH_AUTHORIZED_KEY" ]; then
   echo "Setting SSH authorized_keys..."
   mkdir -p /root/.ssh
@@ -55,6 +57,7 @@ ln -sf /irssi_config /root/.irssi
 #   apk --no-cache add mosh
 # fi
 
+echo "IRSSI image starting - 4"
 if [ -n "$ENABLE_SCRIPTS" ]; then
   echo "Enabling irssi script support..."
   apk --no-cache add irssi-perl
