@@ -1,3 +1,8 @@
+# -----
+Per creare cus bild:
+docker build https://github.com/The-XOR/docker-irssi.git
+# -----
+
 # SSH + TMUX + IRSSI
 Combine ssh, tmux, and irssi to create a remotely hosted IRC client.
 
